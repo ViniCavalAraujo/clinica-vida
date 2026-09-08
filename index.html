@@ -4,58 +4,70 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Clínica Vida</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <header>
-        <h1>
-            Clínica vida
-        </h1>
-        <nav>
-            <ul>
-                <li><a href="">Início</a></li>
-                <li><a href="">Sobre</a></li>
-                <li><a href="">Especialidades</a></li>
-                <li><a href="">Profissionais</a></li>
-            </ul>
-        </nav>
+        <div class="init-head">
+            <h1>
+                Clínica vida
+            </h1>
+            <nav class="cont-menu">
+                <button class="btn-menu">☰</button>
+                <ul class="menu">
+                    <li><a href="#">Início</a></li>
+                    <li><a href="#sobre">Sobre</a></li>
+                    <li><a href="#infos">Especialidades</a></li>
+                    <li><a href="#infos">Profissionais</a></li>
+                </ul>
+            </nav>
+        </div>
         <p>Cuidando da sua saúde há mais de 10 anos</p>
-        <button>Agendar consulta</button>
+        <button id="botao">Agendar consulta</button>
     </header>
     <main>
-        imagem da clínica
+        <img src="clinic.jpg" alt="Clínica Imagem" class="img-clinic">
 
-        <section>
+        <section class="sobre" id="sobre">
             <h2>Sobre nós</h2>
             <p>
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates sit fugiat, soluta accusantium enim qui repellendus sapiente hic odio maiores tempore a corporis fugit minus adipisci, cupiditate omnis! Cum, voluptates!
             </p>
         </section>
 
-        <section>
+        <section class="infos" id="infos">
             <div>
                 <h2>Nossos serviços</h2>
-                <ul>
+                <ul class="espec-lista">
                     <li>Dermatologia</li>
                     <li>Psicologia</li>
                     <li>Nutrição</li>
                 </ul>
             </div>
-            <h3>Profissionais</h3>
-            <div>
-                <span>Dra. Ana</span>
-                <span>Dermatologia</span>
-                <span>08:00 - 17:00</span>
-            </div>
-            <div>
-                <span>Dr. Fábio</span>
-                <span>Psicologia</span>
-                <span>09:00 - 18:00</span>
-            </div>
+            
+            <article>
+                <h3>Profissionais</h3>
+                <div>
+                    <span>Dra. Ana</span>
+                    <span>- Dermatologia</span>
+                    <span>08:00 - 17:00</span>
+                </div>
+                <div>
+                    <span>Dr. Fábio</span>
+                    <span>- Psicologia</span>
+                    <span>09:00 - 18:00</span>
+                </div>
+                <div>
+                    <span>Dr. João</span>
+                    <span>- Nutrição</span>
+                    <span>09:00 - 18:00</span>
+                </div>
+            </article>
         </section>
-
-        <section>
+        <br>
+        <section class="agendamento">
             <h3>Agendamento</h3>
-            <form action="#">
+            <form action="#" class="form">
                 <div>
                     <label for="nome">Nome</label>
                     <input type="text" name="nome" id="nome">
@@ -75,6 +87,7 @@
                     <select name="espec" id="espec">
                         <option value="der">Dermatologia</option>
                         <option value="psi">Psicologia</option>
+                        <option value="nut">Nutrição</option>
                     </select>
                 </div>
                 <div>
@@ -92,5 +105,7 @@
     <footer>
         <p>Clínica vida &copy;</p>
     </footer>
+
+    <script src="script.js"></script>
 </body>
 </html>
