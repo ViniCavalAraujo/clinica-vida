@@ -1,0 +1,189 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: rgb(172, 220, 172);
+    
+}
+
+header {
+    background: linear-gradient(to bottom, green, lightgreen);
+    padding: 30px;
+}
+
+.init-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+header h1 {
+    color: rgb(5, 69, 5);
+    border: 1px solid white;
+    padding: 2px;
+    text-align: center;
+}
+
+.cont-menu {
+    display: flex;
+}
+
+.btn-menu {
+    display: none;
+    margin: auto;
+    background: transparent;
+    border: none;
+    font-size: 1.6em;
+    cursor: pointer;
+    color: white;
+}
+
+#hamburguer {
+    text-align: center;
+}
+
+.menu {
+    display: flex;
+    gap: 10px;
+    list-style-type: none;
+}
+
+.menu a {
+    color: rgb(235, 234, 234);
+    text-decoration: none;
+}
+
+.menu a:hover {
+    color: rgb(5, 69, 5);
+}
+
+.menu.ativo {
+    max-height: 200px;
+    background-color: white;
+}
+
+header p {
+   text-align: center;
+   color: white;
+   padding: 15px 0px;
+}
+
+#botao {
+    border: none;
+    padding: 8px;
+    border-radius: 3px;
+    display: block;
+    margin: auto;
+    background-color: rgb(12, 110, 12);
+    color: white;
+    cursor: pointer;
+}
+
+.img-clinic {
+    display: block;
+    margin: auto;
+}
+
+main {
+    max-width: 540px;
+    margin: auto;
+    background-color: white;
+    padding: 30px;
+}
+
+.sobre {
+    text-align: center;
+    padding: 8px;
+}
+
+.sobre p {
+    line-height: 1.8em;
+}
+
+.infos {
+    border: 2px solid green;
+    padding: 12px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    border-radius: 10px;
+    background-color: rgb(210, 245, 210);
+}
+
+.infos h2, .infos h3 {
+    color: rgb(5, 69, 5);
+}
+
+.espec-lista {
+    list-style-type: none;
+    margin-top: 4px;
+}
+
+.espec-lista li {
+    margin-bottom: 4px;
+}
+
+.agendamento {
+    padding: 20px;
+    border: 1px solid black;
+    margin-top: 10px;
+}
+
+.agendamento > h3 {
+    text-align: center;
+    margin-bottom: 12px;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+}
+
+footer {
+    background-color: green;
+    color: white;
+    text-align: center;
+    padding: 3px;
+}
+
+
+@media (max-width: 640px) {
+    .init-head {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .cont-menu {
+        flex-direction: column;
+    }
+    .btn-menu {
+        display: block;
+    }
+    .menu {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        max-height: 0;
+        overflow: hidden;
+        transition:  max-height 0.4s ease, background-color 0.4s ease;
+    }
+    .menu li {
+        border-bottom: 1px solid rgb(5, 69, 5);
+        width: 100%;
+        text-align: center;
+        padding: 10px;
+    }
+    .menu a {
+        color: rgb(5, 69, 5);
+    }
+}
