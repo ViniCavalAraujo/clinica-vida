@@ -70,17 +70,17 @@
             <form action="#" class="form">
                 <div>
                     <label for="nome">Nome</label>
-                    <input type="text" name="nome" id="nome">
+                    <input type="text" name="nome" id="nome" required maxlength="60">
                 </div>
 
                 <div>
                     <label for="email">E-mail</label>
-                    <input type="text" name="email" id="email">
+                    <input type="email" name="email" id="email" required>
                 </div>
 
                 <div>
                     <label for="telefone">Telefone</label>
-                    <input type="tel" name="telefone" id="telefone">
+                    <input type="tel" name="telefone" id="telefone" required>
                 </div>
                  <div>
                     <span>Especialidade</span>
@@ -92,11 +92,11 @@
                 </div>
                 <div>
                     <label for="data">Data</label>
-                    <input type="date" name="data" id="data">
+                    <input type="date" name="data" id="data" required>
                 </div>
                 <div>
                     <label for="hora">Horário</label>
-                    <input type="time" name="hora" id="hor">
+                    <input type="time" name="hora" id="hor" required>
                 </div>
                 <button type="submit">Agendar</button>
             </form>
