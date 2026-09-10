@@ -1,0 +1,17 @@
+[
+    {
+        "nome": "Dra. Ana Silva",
+        "especialidade": "Dermatologia",
+        "horario": "08:00 - 17:00"
+    },
+    {
+        "nome": "Dr. Fábio",
+        "especialidade": "Psicologia",
+        "horario": "09:00 - 18:00"
+    },
+    {
+        "nome": "Dr. João",
+        "especialidade": "Nutrição",
+        "horario": "09:00 - 18:00"
+    }
+]

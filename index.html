@@ -34,7 +34,7 @@
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates sit fugiat, soluta accusantium enim qui repellendus sapiente hic odio maiores tempore a corporis fugit minus adipisci, cupiditate omnis! Cum, voluptates!
             </p>
         </section>
-
+            
         <section class="infos" id="infos">
             <div>
                 <h2>Nossos serviços</h2>
@@ -44,24 +44,10 @@
                     <li>Nutrição</li>
                 </ul>
             </div>
-            
+
             <article>
                 <h3>Profissionais</h3>
-                <div>
-                    <span>Dra. Ana</span>
-                    <span>- Dermatologia</span>
-                    <span>08:00 - 17:00</span>
-                </div>
-                <div>
-                    <span>Dr. Fábio</span>
-                    <span>- Psicologia</span>
-                    <span>09:00 - 18:00</span>
-                </div>
-                <div>
-                    <span>Dr. João</span>
-                    <span>- Nutrição</span>
-                    <span>09:00 - 18:00</span>
-                </div>
+                <div id="profissionais"></div>
             </article>
         </section>
         <br>
@@ -82,6 +68,7 @@
                     <label for="telefone">Telefone</label>
                     <input type="tel" name="telefone" id="telefone" required>
                 </div>
+                
                  <div>
                     <span>Especialidade</span>
                     <select name="espec" id="espec">
@@ -97,6 +84,19 @@
                 <div>
                     <label for="hora">Horário</label>
                     <input type="time" name="hora" id="hor" required>
+                </div>
+                <div>
+                    <label for="cep">CEP</label>
+                    <input type="number" id="cep">
+                    <button type="button" id="bt-cep">Buscar CEP</button>
+                </div>
+
+                <div id="camposEndereco" class="escondido">
+                    <input type="text" id="rua" readonly>
+                    <input type="text" id="bairro" readonly>
+                    <input type="text" id="cidade" readonly>
+                    <input type="text" id="uf" readonly>
+                    <input type="text" id="complemento" placeholder="Complemento (opcional)">
                 </div>
                 <button type="submit">Agendar</button>
             </form>

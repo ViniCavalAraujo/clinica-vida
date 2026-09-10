@@ -132,6 +132,22 @@ main {
     margin-bottom: 4px;
 }
 
+#profissionais {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    background-color: rgb(122, 217, 122);
+    max-width: 150px;
+    margin: auto;
+    padding: 5px;
+    border: 1px solid rgb(12, 110, 12);
+}
+
+#profissionais h2 {
+    font-size: 1.2em;
+    padding-top: 6px;
+}
+ 
 .agendamento {
     padding: 20px;
     border: 1px solid black;
@@ -150,11 +166,31 @@ main {
     align-items: center;
 }
 
+#res-cep {
+    padding: 10px 0px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
 footer {
     background-color: green;
     color: white;
     text-align: center;
     padding: 3px;
+}
+
+.escondido.ativo {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    align-items: center;
+    justify-content: center;
+}
+
+.escondido {
+    display: none;
 }
 
 

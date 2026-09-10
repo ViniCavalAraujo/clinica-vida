@@ -2,6 +2,7 @@ const btn_menu = document.querySelector('.btn-menu')
 const form = document.querySelector('.form')
 const email = document.querySelector('#email')
 const telefone = document.querySelector('#telefone')
+const bt_cep = document.querySelector('#bt-cep')
 
 form.addEventListener('submit', (event) => {
     event.preventDefault()
@@ -27,6 +28,10 @@ btn_menu.addEventListener('click', () => {
     menu.classList.toggle('ativo')
 })
 
+bt_cep.addEventListener('click', () => {
+    validarCep()
+})
+
 
 const validarEmail = (email) => {
     const regexEmail = /^[^\s]+@[^\s]+\.[^\s]+$/
@@ -39,3 +44,35 @@ const validarTelefone = (telefone) => {
     return regexTelefone.test(apenasNumeros)
 }
 
+async function carregarProfissional() {
+    const resposta = await fetch("./profissionais.json")
+    const dados = await resposta.json()
+
+    const profissionais = document.querySelector('#profissionais')
+
+    const arrayProfissionais = dados.map((profissional) => {
+        return `<h2>${profissional.nome}</h2>
+                <span>${profissional.especialidade}</span> 
+                <span>${profissional.horario}</span>`
+    })
+    console.log(dados)
+    profissionais.innerHTML = arrayProfissionais.join("")
+}
+carregarProfissional()
+
+async function validarCep() {
+    try {
+        const cep = document.querySelector('#cep').value
+        const resposta = await fetch(`https://viacep.com.br/ws/${cep}/json/`)
+        const dados = await resposta.json()
+
+        document.querySelector('#rua').value = dados.logradouro
+        document.querySelector('#bairro').value = dados.bairro
+        document.querySelector('#cidade').value = dados.localidade
+        document.querySelector('#uf').value = dados.uf
+
+        document.querySelector('#camposEndereco').classList.toggle('ativo')
+    } catch (error) {
+        console.log(error)
+    }
+}
