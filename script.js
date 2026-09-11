@@ -4,6 +4,8 @@ const email = document.querySelector('#email')
 const telefone = document.querySelector('#telefone')
 const bt_cep = document.querySelector('#bt-cep')
 const bt_agendar = document.querySelector('#botao-agendar')
+const cepInput = document.querySelector('#cep')
+const data = document.querySelector('#data')
 
 form.addEventListener('submit', (event) => {
     event.preventDefault()
@@ -54,6 +56,18 @@ const validarTelefone = (telefone) => {
 }
 
 
+const verificarCep = (cep) => {
+    const regexCep = /^[0-9]{8}$/
+    return regexCep.test(cep)
+}
+
+//replace no evento input para aceitar somente números
+cepInput.addEventListener('input', () => {
+    cepInput.value = cepInput.value.replace(/[^0-9]/g, '')
+})
+
+
+
 //funções fetch
 async function carregarProfissional() {
     try {
@@ -84,8 +98,18 @@ async function validarCep() {
             return
         }
 
+        if(!verificarCep(cep)) {
+            alert('Cep inválido')
+            return
+        }
+
         const resposta = await fetch(`https://viacep.com.br/ws/${cep}/json/`)
         const dados = await resposta.json()
+
+        if (dados.erro) {
+            alert('CEP não encontrado')
+            return
+        }
 
       
         document.querySelector('#rua').value = dados.logradouro
@@ -95,6 +119,6 @@ async function validarCep() {
 
         document.querySelector('#camposEndereco').classList.toggle('ativo')
     } catch (error) {
-        console.log(error)
+        
     }
 }
