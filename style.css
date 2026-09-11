@@ -46,10 +46,6 @@ header h1 {
     color: white;
 }
 
-#hamburguer {
-    text-align: center;
-}
-
 .menu {
     display: flex;
     gap: 10px;
@@ -164,6 +160,16 @@ main {
     flex-direction: column;
     gap: 10px;
     align-items: center;
+    justify-content: center;
+}
+
+.form > div {
+    width: min(100%, 300px);
+}
+
+.form input,
+.form select {
+    width: 100%;
 }
 
 .escondido.ativo {
@@ -214,5 +220,18 @@ footer {
     }
     .menu a {
         color: rgb(5, 69, 5);
+    }
+}
+
+
+@media (max-width: 400px) {
+    main {
+        padding: 15px;
+    }
+    .agendamento {
+        padding: 10px;
+    }
+    .img-clinic {
+        width: 65%;
     }
 }
