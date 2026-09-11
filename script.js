@@ -3,6 +3,7 @@ const form = document.querySelector('.form')
 const email = document.querySelector('#email')
 const telefone = document.querySelector('#telefone')
 const bt_cep = document.querySelector('#bt-cep')
+const bt_agendar = document.querySelector('#botao-agendar')
 
 form.addEventListener('submit', (event) => {
     event.preventDefault()
@@ -23,16 +24,24 @@ form.addEventListener('submit', (event) => {
     form.reset()
 })
 
+//botão para rolagem até a sessão de agendamento
+bt_agendar.addEventListener('click', () => {
+    document.querySelector('.agendamento').scrollIntoView()
+})
+
+//botão de clique do menu
 btn_menu.addEventListener('click', () => {
     const menu = document.querySelector('.menu')
     menu.classList.toggle('ativo')
 })
 
+//botão de clique do cep
 bt_cep.addEventListener('click', () => {
     validarCep()
 })
 
 
+//funções validativas
 const validarEmail = (email) => {
     const regexEmail = /^[^\s]+@[^\s]+\.[^\s]+$/
     return regexEmail.test(email)
@@ -44,28 +53,41 @@ const validarTelefone = (telefone) => {
     return regexTelefone.test(apenasNumeros)
 }
 
+
+//funções fetch
 async function carregarProfissional() {
-    const resposta = await fetch("./profissionais.json")
-    const dados = await resposta.json()
+    try {
+        const resposta = await fetch("./profissionais.json")
+        const dados = await resposta.json()
 
-    const profissionais = document.querySelector('#profissionais')
+        const profissionais = document.querySelector('#profissionais')
 
-    const arrayProfissionais = dados.map((profissional) => {
-        return `<h2>${profissional.nome}</h2>
-                <span>${profissional.especialidade}</span> 
-                <span>${profissional.horario}</span>`
-    })
-    console.log(dados)
-    profissionais.innerHTML = arrayProfissionais.join("")
+        const arrayProfissionais = dados.map((profissional) => {
+            return `<h2>${profissional.nome}</h2>
+                    <span>${profissional.especialidade}</span> 
+                    <span>${profissional.horario}</span>`
+        })
+        profissionais.innerHTML = arrayProfissionais.join("")
+    } catch (error) {
+        console.log(error)
+    }
+    
 }
 carregarProfissional()
 
 async function validarCep() {
     try {
         const cep = document.querySelector('#cep').value
+        
+        if (cep === '') {
+            alert('Insira o cep')
+            return
+        }
+
         const resposta = await fetch(`https://viacep.com.br/ws/${cep}/json/`)
         const dados = await resposta.json()
 
+      
         document.querySelector('#rua').value = dados.logradouro
         document.querySelector('#bairro').value = dados.bairro
         document.querySelector('#cidade').value = dados.localidade

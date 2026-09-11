@@ -76,7 +76,7 @@ header p {
    padding: 15px 0px;
 }
 
-#botao {
+#botao-agendar {
     border: none;
     padding: 8px;
     border-radius: 3px;
@@ -163,14 +163,6 @@ main {
     display: flex;
     flex-direction: column;
     gap: 10px;
-    align-items: center;
-}
-
-#res-cep {
-    padding: 10px 0px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
     align-items: center;
 }
 
