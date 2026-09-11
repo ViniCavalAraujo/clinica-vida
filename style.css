@@ -166,13 +166,6 @@ main {
     align-items: center;
 }
 
-footer {
-    background-color: green;
-    color: white;
-    text-align: center;
-    padding: 3px;
-}
-
 .escondido.ativo {
     display: flex;
     flex-direction: column;
@@ -184,6 +177,14 @@ footer {
 .escondido {
     display: none;
 }
+
+footer {
+    background-color: green;
+    color: white;
+    text-align: center;
+    padding: 3px;
+}
+
 
 
 @media (max-width: 640px) {

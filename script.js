@@ -20,7 +20,7 @@ form.addEventListener('submit', (event) => {
         return
     }
     
-    alert('dados enviados')
+    alert('Consulta agendada')
     form.reset()
 })
 
