@@ -6,7 +6,7 @@ const bt_cep = document.querySelector('#bt-cep')
 const bt_agendar = document.querySelector('#botao-agendar')
 const cepInput = document.querySelector('#cep')
 const data = document.querySelector('#data')
-let listaProfissionais = [] //pra guardar os profissionais depois do fetch
+let listaProfissionais = [] //para guardar os profissionais depois do fetch
 
 
 form.addEventListener('submit', (event) => {
@@ -78,7 +78,10 @@ cepInput.addEventListener('keydown', (event) => {
     }
 })
 
-
+//replace no evento input para aceitar somente números
+cepInput.addEventListener('input', () => {
+    cepInput.value = cepInput.value.replace(/[^0-9]/g, '')
+})
 
 
 //FUNÇÕES VALIDATIVAS
@@ -99,10 +102,6 @@ const verificarCep = (cep) => {
     return regexCep.test(cep)
 }
 
-//replace no evento input para aceitar somente números
-cepInput.addEventListener('input', () => {
-    cepInput.value = cepInput.value.replace(/[^0-9]/g, '')
-})
 
 //FUNÇÕES LÓGICAS
 function gerarHorariosDisponiveis(horarioTexto) {
@@ -144,7 +143,7 @@ async function carregarProfissional() {
     try {
         const resposta = await fetch("./profissionais.json")
         const dados = await resposta.json()
-        listaProfissionais = dados // guarda os dados pra usar no submit
+        listaProfissionais = dados //guarda os dados para usar em atualizarHorariosDisponiveis()
 
         const profissionais = document.querySelector('#profissionais')
         const arrayProfissionais = dados.map((profissional) => {
@@ -153,7 +152,7 @@ async function carregarProfissional() {
                     <span>${profissional.horario}</span>`
         })
         profissionais.innerHTML = arrayProfissionais.join("")
-        atualizarHorariosDisponiveis() // preenche os horários já ao carregar a página
+        atualizarHorariosDisponiveis() //preenche os horários ao carregar a página
     } catch (error) {
         console.log(error)
     }
