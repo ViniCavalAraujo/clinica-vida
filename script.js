@@ -6,12 +6,15 @@ const bt_cep = document.querySelector('#bt-cep')
 const bt_agendar = document.querySelector('#botao-agendar')
 const cepInput = document.querySelector('#cep')
 const data = document.querySelector('#data')
+let listaProfissionais = [] //pra guardar os profissionais depois do fetch
+
 
 form.addEventListener('submit', (event) => {
     event.preventDefault()
 
     const emailUsuario = email.value
     const telefoneUsuario = telefone.value
+
     if (!validarEmail(emailUsuario)) {
         alert('e-mail inválido')
         return
@@ -21,10 +24,31 @@ form.addEventListener('submit', (event) => {
         alert('telefone inválido')
         return
     }
-    
+
+
+    //validação de data
+    const hoje = new Date()
+    hoje.setHours(0, 0, 0, 0) //zera hora, minutos, segundos e milissegundos
+    const dataObj = new Date(data.value)
+
+    if (dataObj < hoje) {
+        alert('A data não pode ser anterior a hoje')
+        return
+    }
+
+    const diaSemana = dataObj.getDay()
+
+    if (diaSemana === 0 || diaSemana === 6) {
+        alert('Não atendemos aos finais de semana')
+        return
+    }
+
     alert('Consulta agendada')
     form.reset()
 })
+
+
+//EVENTOS
 
 //botão para rolagem até a sessão de agendamento
 bt_agendar.addEventListener('click', () => {
@@ -37,13 +61,27 @@ btn_menu.addEventListener('click', () => {
     menu.classList.toggle('ativo')
 })
 
+//dispara o evento quando o usuário seleciona uma opção diferente no <select>
+document.querySelector('#espec').addEventListener('change', atualizarHorariosDisponiveis)
+
 //botão de clique do cep
 bt_cep.addEventListener('click', () => {
     validarCep()
 })
 
 
-//funções validativas
+//quando o usuário apertar Enter no campo de cep trás os dados
+cepInput.addEventListener('keydown', (event) => {
+    if (event.key === 'Enter') {
+        event.preventDefault() // impede o submit do form
+        validarCep()           // já aproveita pra buscar o CEP direto
+    }
+})
+
+
+
+
+//FUNÇÕES VALIDATIVAS
 const validarEmail = (email) => {
     const regexEmail = /^[^\s]+@[^\s]+\.[^\s]+$/
     return regexEmail.test(email)
@@ -66,28 +104,62 @@ cepInput.addEventListener('input', () => {
     cepInput.value = cepInput.value.replace(/[^0-9]/g, '')
 })
 
+//FUNÇÕES LÓGICAS
+function gerarHorariosDisponiveis(horarioTexto) {
+    const [inicio, fim] = horarioTexto.split(' - ')      
+
+    //separa hora do minuto e converte para inteiro
+    const horaInicio = parseInt(inicio.split(':')[0])      
+    const horaFim = parseInt(fim.split(':')[0])
 
 
-//funções fetch
+    const horarios = []
+    //conversão para texto novamente
+    for (let h = horaInicio; h <= horaFim; h++) {
+        horarios.push(String(h).padStart(2, '0') + ':00') 
+    }
+    return horarios 
+}
+
+function atualizarHorariosDisponiveis() {
+    const especialidade = document.querySelector('#espec').value
+
+    //pega listaProfissionais que contém os dados fetch usando .find() para verificar se a 
+    //especialidade do JSON é igual à selecionada do usuário
+    const profissional = listaProfissionais.find((p) => p.especialidade === especialidade)
+
+    if (!profissional) return
+
+    //pega o horário do profissional e atribui a função acima
+    const horarios = gerarHorariosDisponiveis(profissional.horario)
+    
+    const hora = document.querySelector('#hora')
+    hora.innerHTML = horarios.map((h) => `<option value="${h}">${h}</option>`).join('')
+
+}
+
+
+//FUNÇÕES FETCH
 async function carregarProfissional() {
     try {
         const resposta = await fetch("./profissionais.json")
         const dados = await resposta.json()
+        listaProfissionais = dados // guarda os dados pra usar no submit
 
         const profissionais = document.querySelector('#profissionais')
-
         const arrayProfissionais = dados.map((profissional) => {
             return `<h2>${profissional.nome}</h2>
                     <span>${profissional.especialidade}</span> 
                     <span>${profissional.horario}</span>`
         })
         profissionais.innerHTML = arrayProfissionais.join("")
+        atualizarHorariosDisponiveis() // preenche os horários já ao carregar a página
     } catch (error) {
         console.log(error)
     }
-    
 }
 carregarProfissional()
+
 
 async function validarCep() {
     try {
@@ -119,6 +191,6 @@ async function validarCep() {
 
         document.querySelector('#camposEndereco').classList.toggle('ativo')
     } catch (error) {
-        
+        console.log(error)
     }
 }
